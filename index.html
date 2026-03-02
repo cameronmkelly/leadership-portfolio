@@ -35,8 +35,9 @@
   /* ── HERO ── */
   .hero {
     position: relative;
-    height: 100vh;
-    min-height: 600px;
+    height: 52vh;
+    min-height: 340px;
+    max-height: 520px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,23 +69,23 @@
 
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.4rem, 7vw, 5rem);
     font-weight: 400;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     line-height: 1.1;
   }
 
   .hero-title {
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-size: clamp(0.9rem, 2.2vw, 1.25rem);
     font-weight: 400;
     letter-spacing: 0.05em;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .hero-tags {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 300;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -93,7 +94,7 @@
 
   .hero-scroll {
     position: absolute;
-    bottom: 40px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -110,7 +111,7 @@
   .hero-scroll::after {
     content: '';
     width: 1px;
-    height: 40px;
+    height: 32px;
     background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
   }
 
@@ -186,34 +187,17 @@
     color: var(--brown);
   }
 
-  /* ── ABOUT ── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 64px;
-    align-items: start;
+  /* ── ABOUT (stacked layout) ── */
+  .about-photo-wrap {
+    margin-bottom: 32px;
   }
 
-  .about-photo {
-    position: sticky;
-    top: 40px;
-  }
-
-  .about-photo img {
+  .about-photo-wrap img {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    object-position: center top;
+    max-width: 320px;
+    display: block;
     border-radius: 2px;
     filter: sepia(15%) contrast(1.05);
-  }
-
-  .about-photo-caption {
-    margin-top: 12px;
-    font-size: 0.75rem;
-    color: var(--text-light);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
   .about-text p {
@@ -307,7 +291,7 @@
     padding-bottom: 32px;
   }
 
-  /* ── STRENGTHS & VALUES ── */
+  /* ── ENTRIES ── */
   .entry {
     margin-bottom: 28px;
     padding-bottom: 28px;
@@ -504,16 +488,6 @@
 
     .container { padding: 0 24px; }
 
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-
-    .about-photo {
-      position: static;
-      max-width: 240px;
-    }
-
     .timeline::before { left: 90px; }
     .year-label { width: 70px; }
   }
@@ -535,33 +509,35 @@
 <!-- DEFINITION OF LEADERSHIP -->
 <div class="definition-band">
   <blockquote>A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</blockquote>
-  <p>Leadership doesn't have to be grand. In my experience, the best of it rarely is.</p>
 </div>
 
-<!-- ABOUT ME -->
-<section>
-  <div class="container">
-    <div class="section-label">About Me</div>
-    <div class="about-grid">
-      <div class="about-photo">
-        <img src="portrait-photo.jpg" alt="Cameron Kelly">
-        <p class="about-photo-caption">Cameron Kelly &mdash; Operations Leader</p>
-      </div>
-      <div class="about-text">
-        <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
-        <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
-        <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
-        <p class="closing">This portfolio is a record of that process.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CORE VALUES + STRENGTHS (COLLAPSIBLE) -->
+<!-- ABOUT ME + CORE VALUES + STRENGTHS (unified collapsible section) -->
 <div class="collapsibles-section">
   <div class="container">
-    <div class="section-label">Who I Am</div>
+    <div class="section-label">About Me</div>
 
+    <!-- About Me collapsible -->
+    <div class="collapsible" id="col-about">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-about')">
+        Biography
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <div class="about-photo-wrap">
+            <img src="portrait-photo.jpg" alt="Cameron Kelly">
+          </div>
+          <div class="about-text">
+            <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
+            <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
+            <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+            <p class="closing">This portfolio is a record of that process.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Values collapsible -->
     <div class="collapsible" id="col-values">
       <button class="collapsible-trigger" onclick="toggleCollapsible('col-values')">
         My Core Values
@@ -581,9 +557,10 @@
       </div>
     </div>
 
+    <!-- Strengths collapsible -->
     <div class="collapsible" id="col-strengths">
       <button class="collapsible-trigger" onclick="toggleCollapsible('col-strengths')">
-        My Strengths <span style="font-size:0.85rem; font-family:'DM Sans',sans-serif; font-weight:300; color:var(--text-muted); margin-left:10px;">Clifton Strengthsfinder</span>
+        My Strengths <span style="font-size:0.85rem; font-family:'DM Sans',sans-serif; font-weight:300; color:var(--text-muted); margin-left:10px;">Gallup Clifton Strengthsfinder</span>
         <span class="collapsible-icon"></span>
       </button>
       <div class="collapsible-body">
@@ -615,10 +592,10 @@
   </div>
 </div>
 
-<!-- IDEAL FUTURE / TIMELINE -->
+<!-- MY FUTURE / TIMELINE -->
 <section class="timeline-section">
   <div class="container">
-    <div class="section-label">Ideal Future</div>
+    <div class="section-label">My Future</div>
     <h2>The Road Ahead</h2>
 
     <p class="timeline-intro">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3-5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
