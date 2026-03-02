@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cameron Kelly | Leadership Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f2ed;
+    --warm-white: #faf8f5;
+    --gold: #c9a96e;
+    --gold-dark: #8b6f4e;
+    --brown: #4a3728;
+    --brown-light: #6b4f35;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --text-light: #999;
+    --border: #ddd5c8;
+    --section-pad: 80px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('header-photo.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    filter: brightness(0.45);
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 0 24px;
+    animation: heroFade 1.2s ease forwards;
+  }
+
+  @keyframes heroFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .hero-tags {
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── DEFINITION BAND ── */
+  .definition-band {
+    background: var(--brown);
+    padding: 56px 24px;
+    text-align: center;
+  }
+
+  .definition-band blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--cream);
+    max-width: 760px;
+    margin: 0 auto 16px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .definition-band p {
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section {
+    padding: var(--section-pad) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    color: var(--brown);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-photo {
+    position: sticky;
+    top: 40px;
+  }
+
+  .about-photo img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 2px;
+    filter: sepia(15%) contrast(1.05);
+  }
+
+  .about-photo-caption {
+    margin-top: 12px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.85;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-text p.closing {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--brown-light);
+  }
+
+  /* ── COLLAPSIBLE ── */
+  .collapsible {
+    border-top: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .collapsible:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .collapsible-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--brown);
+    text-align: left;
+    transition: color 0.2s;
+  }
+
+  .collapsible-trigger:hover { color: var(--gold-dark); }
+
+  .collapsible-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .collapsible-icon::before,
+  .collapsible-icon::after {
+    content: '';
+    position: absolute;
+    background: var(--gold-dark);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .collapsible-icon::before {
+    width: 14px; height: 1.5px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .collapsible-icon::after {
+    width: 1.5px; height: 14px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .collapsible.open .collapsible-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .collapsible-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .collapsible.open .collapsible-body {
+    max-height: 2000px;
+  }
+
+  .collapsible-inner {
+    padding-bottom: 32px;
+  }
+
+  /* ── STRENGTHS & VALUES ── */
+  .entry {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .entry-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+
+  .entry p {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.8;
+  }
+
+  .entry-divider {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 10px 2px 0;
+  }
+
+  /* ── COLLAPSIBLE SECTIONS WRAPPER ── */
+  .collapsibles-section {
+    padding: var(--section-pad) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: var(--section-pad) 0;
+  }
+
+  .timeline-intro {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.85;
+    max-width: 700px;
+    margin-bottom: 56px;
+  }
+
+  .timeline {
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 140px;
+    top: 12px;
+    bottom: 12px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--gold-dark), var(--brown));
+  }
+
+  .milestone {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 52px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .milestone.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .year-label {
+    width: 120px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-right: 0;
+    padding-top: 4px;
+  }
+
+  .year-label span {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    color: var(--gold-dark);
+    font-style: italic;
+  }
+
+  .dot-wrapper {
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--gold);
+    flex-shrink: 0;
+  }
+
+  .milestone.current .dot {
+    width: 14px;
+    height: 14px;
+    background: var(--gold-dark);
+    box-shadow: 0 0 0 3px rgba(139,111,78,0.2);
+  }
+
+  .milestone.future .dot {
+    background: var(--brown);
+    box-shadow: 0 0 0 1px var(--brown);
+  }
+
+  .milestone-content {
+    flex: 1;
+    padding-left: 28px;
+  }
+
+  .milestone-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .tag-now { background: #e8ddd0; color: var(--brown-light); }
+  .tag-near { background: #dde8e0; color: #2d5a3d; }
+  .tag-mid { background: #dde3e8; color: #2d4a5a; }
+  .tag-long { background: #e8e0dd; color: #5a3d2d; }
+
+  .milestone-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .milestone-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  .timeline-footer {
+    margin-top: 24px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown);
+    padding: 48px 40px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  footer span {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    :root { --section-pad: 56px; }
+
+    .container { padding: 0 24px; }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .about-photo {
+      position: static;
+      max-width: 240px;
+    }
+
+    .timeline::before { left: 90px; }
+    .year-label { width: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Cameron Kelly</h1>
+    <p class="hero-title">Operations &amp; Production Leader</p>
+    <p class="hero-tags">Spirits Production &nbsp;|&nbsp; Product Development &nbsp;|&nbsp; Facility Startup &nbsp;|&nbsp; Regulatory Compliance</p>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+<!-- DEFINITION OF LEADERSHIP -->
+<div class="definition-band">
+  <blockquote>A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</blockquote>
+  <p>Leadership doesn't have to be grand. In my experience, the best of it rarely is.</p>
+</div>
+
+<!-- ABOUT ME -->
+<section>
+  <div class="container">
+    <div class="section-label">About Me</div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="portrait-photo.jpg" alt="Cameron Kelly">
+        <p class="about-photo-caption">Cameron Kelly &mdash; Operations Leader</p>
+      </div>
+      <div class="about-text">
+        <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
+        <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
+        <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+        <p class="closing">This portfolio is a record of that process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES + STRENGTHS (COLLAPSIBLE) -->
+<div class="collapsibles-section">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+
+    <div class="collapsible" id="col-values">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-values')">
+        My Core Values
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Curiosity</div>
+            <p>Constantly learning and staying genuinely engaged with new people and ideas is something I work at deliberately. It drives me to keep asking why until I actually understand something, and then to turn that understanding into something useful for the people around me.</p>
+          </div>
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Optimism</div>
+            <p>Being willing to invest time and energy into things that won't pay off for a long time requires a genuine belief that the future is worth building toward. Most of the work I do operates on timelines measured in years, sometimes decades, and that's only sustainable if you actually believe in where you're headed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapsible" id="col-strengths">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-strengths')">
+        My Strengths <span style="font-size:0.85rem; font-family:'DM Sans',sans-serif; font-weight:300; color:var(--text-muted); margin-left:10px;">Clifton Strengthsfinder</span>
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Analytical</div>
+            <p>I gather information into a structured system, work to deeply understand how things work together, and summarize what I find into something useful for others. I've built much of my career in brewing and distilling on this strength.</p>
+          </div>
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Empathy</div>
+            <p>I pay attention to how someone's emotional state affects others and a group's performance, not just how it affects the individual. I tend to notice when something is off before it gets said out loud, and I try to do something about it early enough to matter.</p>
+          </div>
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Positivity</div>
+            <p>Enthusiasm is contagious, and I've learned to use that deliberately. Being able to lead a narrative with genuine optimism is a powerful tool, and when it's authentic it can help build successful teams through almost anything.</p>
+          </div>
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Intellection</div>
+            <p>I've worked to develop expertise by being very methodical about how I learn things. The pitfall is getting mired in research instead of moving into actual skill development, so I try to use that depth to raise the collective knowledge base of the team rather than keeping it to myself.</p>
+          </div>
+          <div class="entry">
+            <div class="entry-name"><span class="entry-divider"></span>Restorative</div>
+            <p>This has been a constant guiding force in my life. Bringing creative solutions to help solve a problem is one of the skills that has helped me the most in my career, and I have a track record of recovering projects that others had written off. I'm working on applying that same diagnostic energy upstream, to the processes and communication breakdowns that allow failure to happen in the first place.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- IDEAL FUTURE / TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-label">Ideal Future</div>
+    <h2>The Road Ahead</h2>
+
+    <p class="timeline-intro">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3-5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
+
+    <div class="timeline">
+
+      <div class="milestone current" data-milestone>
+        <div class="year-label"><span>2025 &ndash; 2027</span></div>
+        <div class="dot-wrapper"><div class="dot"></div></div>
+        <div class="milestone-content">
+          <span class="milestone-tag tag-now">Now</span>
+          <h3>Complete the B.A.S. in Leadership &amp; Management</h3>
+          <p>Returning to school is a deliberate pivot toward making my skills transferable. Not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+        </div>
+      </div>
+
+      <div class="milestone" data-milestone>
+        <div class="year-label"><span>2025 &ndash; 2026</span></div>
+        <div class="dot-wrapper"><div class="dot"></div></div>
+        <div class="milestone-content">
+          <span class="milestone-tag tag-near">Near Term</span>
+          <h3>Transition from Solo Operator to People Manager</h3>
+          <p>My company is scaling and plans to hire 2-3 direct reports in my department. The goal is to successfully move from managing day-to-day operations alone to managing and developing people, which means moving beyond production oversight to focus on the human systems of a business.</p>
+        </div>
+      </div>
+
+      <div class="milestone future" data-milestone>
+        <div class="year-label"><span>2028 &ndash; 2030</span></div>
+        <div class="dot-wrapper"><div class="dot"></div></div>
+        <div class="milestone-content">
+          <span class="milestone-tag tag-mid">Mid Term</span>
+          <h3>VP of Operations or General Manager</h3>
+          <p>Whether I stay in the alcohol industry or move into a new sector, the goal is to be a leader who can translate complex problems into manageable processes in any environment.</p>
+        </div>
+      </div>
+
+      <div class="milestone future" data-milestone>
+        <div class="year-label"><span>Beyond</span></div>
+        <div class="dot-wrapper"><div class="dot"></div></div>
+        <div class="milestone-content">
+          <span class="milestone-tag tag-long">Long Term</span>
+          <h3>Strategic Consulting</h3>
+          <p>In the future, I see myself moving into a role as the external expert who helps others navigate the chaos and avoid the landmines I've already mapped.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="timeline-footer">This portfolio is a living document and will be updated throughout the program.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><span>Cameron Kelly</span> &nbsp;&mdash;&nbsp; Leadership Portfolio &nbsp;&mdash;&nbsp; Chemeketa Community College BAS Leadership &amp; Management</p>
+</footer>
+
+<script>
+  // Collapsible toggle
+  function toggleCollapsible(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Scroll-triggered milestone animation
+  const milestones = document.querySelectorAll('[data-milestone]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 150);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  milestones.forEach(m => observer.observe(m));
+</script>
+
+</body>
+</html>
