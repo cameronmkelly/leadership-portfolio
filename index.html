@@ -8,7 +8,6 @@
 <style>
   :root {
     --cream: #f5f2ed;
-    --warm-white: #faf8f5;
     --gold: #c9a96e;
     --gold-dark: #8b6f4e;
     --brown: #4a3728;
@@ -21,7 +20,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -39,7 +37,6 @@
     min-height: 340px;
     max-height: 520px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -50,7 +47,7 @@
     inset: 0;
     background-image: url('header-photo.jpg');
     background-size: cover;
-    background-position: center 30%;
+    background-position: center 70%;
     filter: brightness(0.45);
   }
 
@@ -64,7 +61,7 @@
 
   @keyframes heroFade {
     from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .hero h1 {
@@ -107,43 +104,49 @@
     text-transform: uppercase;
     animation: bounce 2s infinite;
   }
-
   .hero-scroll::after {
     content: '';
     width: 1px;
     height: 32px;
     background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
   }
-
   @keyframes bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
+    50%       { transform: translateX(-50%) translateY(6px); }
   }
 
-  /* ── DEFINITION BAND ── */
+  /* ── QUOTE — light, no heavy brown box ── */
   .definition-band {
-    background: var(--brown);
-    padding: 56px 24px;
+    padding: 44px 24px;
     text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
   }
 
   .definition-band blockquote {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
     font-style: italic;
-    color: var(--cream);
-    max-width: 760px;
-    margin: 0 auto 16px;
-    line-height: 1.6;
+    color: var(--brown-light);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.65;
     font-weight: 400;
+    position: relative;
+    padding: 0 40px;
   }
 
-  .definition-band p {
-    font-size: 0.85rem;
+  .definition-band blockquote::before,
+  .definition-band blockquote::after {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
     color: var(--gold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    line-height: 0;
+    position: absolute;
+    top: 18px;
   }
+  .definition-band blockquote::before { content: '\201C'; left: 0; }
+  .definition-band blockquote::after  { content: '\201D'; right: 0; }
 
   /* ── LAYOUT ── */
   .container {
@@ -151,13 +154,6 @@
     margin: 0 auto;
     padding: 0 40px;
   }
-
-  section {
-    padding: var(--section-pad) 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  section:last-child { border-bottom: none; }
 
   .section-label {
     font-size: 0.7rem;
@@ -170,7 +166,6 @@
     align-items: center;
     gap: 12px;
   }
-
   .section-label::after {
     content: '';
     flex: 1;
@@ -178,53 +173,15 @@
     background: var(--border);
   }
 
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 32px;
-    color: var(--brown);
-  }
-
-  /* ── ABOUT (stacked layout) ── */
-  .about-photo-wrap {
-    margin-bottom: 32px;
-  }
-
-  .about-photo-wrap img {
-    width: 100%;
-    max-width: 320px;
-    display: block;
-    border-radius: 2px;
-    filter: sepia(15%) contrast(1.05);
-  }
-
-  .about-text p {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.85;
-  }
-
-  .about-text p:last-child { margin-bottom: 0; }
-
-  .about-text p.closing {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--brown-light);
+  /* ── COLLAPSIBLE SECTION WRAPPER ── */
+  .collapsibles-section {
+    padding: var(--section-pad) 0;
+    border-bottom: 1px solid var(--border);
   }
 
   /* ── COLLAPSIBLE ── */
-  .collapsible {
-    border-top: 1px solid var(--border);
-    margin-bottom: 0;
-  }
-
-  .collapsible:last-child {
-    border-bottom: 1px solid var(--border);
-  }
+  .collapsible { border-top: 1px solid var(--border); }
+  .collapsible:last-child { border-bottom: 1px solid var(--border); }
 
   .collapsible-trigger {
     width: 100%;
@@ -240,8 +197,8 @@
     color: var(--brown);
     text-align: left;
     transition: color 0.2s;
+    gap: 16px;
   }
-
   .collapsible-trigger:hover { color: var(--gold-dark); }
 
   .collapsible-icon {
@@ -250,7 +207,6 @@
     flex-shrink: 0;
     position: relative;
   }
-
   .collapsible-icon::before,
   .collapsible-icon::after {
     content: '';
@@ -259,19 +215,16 @@
     border-radius: 1px;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
-
   .collapsible-icon::before {
     width: 14px; height: 1.5px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
-
   .collapsible-icon::after {
     width: 1.5px; height: 14px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
-
   .collapsible.open .collapsible-icon::after {
     transform: translate(-50%, -50%) rotate(90deg);
     opacity: 0;
@@ -280,15 +233,39 @@
   .collapsible-body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.45s ease;
+  }
+  .collapsible.open .collapsible-body { max-height: 3000px; }
+
+  .collapsible-inner { padding-bottom: 36px; }
+
+  /* ── BIOGRAPHY — image top-left, text to the right ── */
+  .bio-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: start;
   }
 
-  .collapsible.open .collapsible-body {
-    max-height: 2000px;
+  .bio-photo img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    filter: sepia(15%) contrast(1.05);
   }
 
-  .collapsible-inner {
-    padding-bottom: 32px;
+  .bio-text p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.85;
+  }
+  .bio-text p:last-child { margin-bottom: 0; }
+  .bio-text p.closing {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--brown-light);
   }
 
   /* ── ENTRIES ── */
@@ -297,12 +274,7 @@
     padding-bottom: 28px;
     border-bottom: 1px solid var(--border);
   }
-
-  .entry:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
+  .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
   .entry-name {
     font-family: 'Playfair Display', serif;
@@ -312,48 +284,48 @@
     margin-bottom: 8px;
   }
 
-  .entry p {
-    font-size: 0.95rem;
-    color: #444;
-    line-height: 1.8;
-  }
+  .entry p { font-size: 0.95rem; color: #444; line-height: 1.8; }
 
   .entry-divider {
     display: inline-block;
-    width: 24px;
-    height: 1px;
+    width: 24px; height: 1px;
     background: var(--gold);
     vertical-align: middle;
     margin: 0 10px 2px 0;
   }
 
-  /* ── COLLAPSIBLE SECTIONS WRAPPER ── */
-  .collapsibles-section {
-    padding: var(--section-pad) 0;
+  /* ── GALLUP LINK ── */
+  .gallup-attribution {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    color: var(--gold-dark);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
+    width: 100%;
+    transition: color 0.2s;
   }
+  .gallup-attribution:hover { color: var(--brown); }
+  .gallup-attribution u { text-decoration-color: var(--gold); text-underline-offset: 3px; }
 
   /* ── TIMELINE ── */
-  .timeline-section {
-    padding: var(--section-pad) 0;
-  }
-
   .timeline-intro {
     font-size: 1rem;
     color: #444;
     line-height: 1.85;
-    max-width: 700px;
-    margin-bottom: 56px;
+    margin-bottom: 40px;
   }
 
-  .timeline {
-    position: relative;
-  }
+  .timeline { position: relative; }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 140px;
+    left: 100px;
     top: 12px;
     bottom: 12px;
     width: 1px;
@@ -363,28 +335,23 @@
   .milestone {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 52px;
+    margin-bottom: 44px;
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-
-  .milestone.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .milestone.visible { opacity: 1; transform: translateY(0); }
+  .milestone:last-child { margin-bottom: 0; }
 
   .year-label {
-    width: 120px;
+    width: 80px;
     flex-shrink: 0;
     text-align: right;
-    padding-right: 0;
     padding-top: 4px;
   }
-
   .year-label span {
     font-family: 'Playfair Display', serif;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: var(--gold-dark);
     font-style: italic;
   }
@@ -398,31 +365,23 @@
   }
 
   .dot {
-    width: 10px;
-    height: 10px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     background: var(--gold);
     border: 2px solid var(--cream);
     box-shadow: 0 0 0 1px var(--gold);
-    flex-shrink: 0;
   }
-
   .milestone.current .dot {
-    width: 14px;
-    height: 14px;
+    width: 14px; height: 14px;
     background: var(--gold-dark);
     box-shadow: 0 0 0 3px rgba(139,111,78,0.2);
   }
-
   .milestone.future .dot {
     background: var(--brown);
     box-shadow: 0 0 0 1px var(--brown);
   }
 
-  .milestone-content {
-    flex: 1;
-    padding-left: 28px;
-  }
+  .milestone-content { flex: 1; padding-left: 24px; }
 
   .milestone-tag {
     display: inline-block;
@@ -434,15 +393,14 @@
     border-radius: 20px;
     margin-bottom: 10px;
   }
-
-  .tag-now { background: #e8ddd0; color: var(--brown-light); }
+  .tag-now  { background: #e8ddd0; color: var(--brown-light); }
   .tag-near { background: #dde8e0; color: #2d5a3d; }
-  .tag-mid { background: #dde3e8; color: #2d4a5a; }
+  .tag-mid  { background: #dde3e8; color: #2d4a5a; }
   .tag-long { background: #e8e0dd; color: #5a3d2d; }
 
   .milestone-content h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text);
     font-weight: 600;
     margin-bottom: 8px;
@@ -453,12 +411,11 @@
     font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.75;
-    max-width: 520px;
   }
 
   .timeline-footer {
-    margin-top: 24px;
-    padding-top: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--border);
     font-size: 0.8rem;
     color: var(--text-light);
@@ -474,7 +431,6 @@
     font-size: 0.8rem;
     letter-spacing: 0.08em;
   }
-
   footer span {
     color: var(--gold);
     font-family: 'Playfair Display', serif;
@@ -485,11 +441,11 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     :root { --section-pad: 56px; }
-
     .container { padding: 0 24px; }
-
-    .timeline::before { left: 90px; }
-    .year-label { width: 70px; }
+    .bio-layout { grid-template-columns: 1fr; }
+    .bio-photo img { max-width: 240px; }
+    .timeline::before { left: 68px; }
+    .year-label { width: 48px; font-size: 0.7rem; }
   }
 </style>
 </head>
@@ -506,17 +462,17 @@
   <div class="hero-scroll">Scroll</div>
 </header>
 
-<!-- DEFINITION OF LEADERSHIP -->
+<!-- QUOTE -->
 <div class="definition-band">
   <blockquote>A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</blockquote>
 </div>
 
-<!-- ABOUT ME + CORE VALUES + STRENGTHS (unified collapsible section) -->
+<!-- ABOUT ME — all collapsibles in one section -->
 <div class="collapsibles-section">
   <div class="container">
     <div class="section-label">About Me</div>
 
-    <!-- About Me collapsible -->
+    <!-- Biography -->
     <div class="collapsible" id="col-about">
       <button class="collapsible-trigger" onclick="toggleCollapsible('col-about')">
         Biography
@@ -524,20 +480,22 @@
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
-          <div class="about-photo-wrap">
-            <img src="portrait-photo.jpg" alt="Cameron Kelly">
-          </div>
-          <div class="about-text">
-            <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
-            <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
-            <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
-            <p class="closing">This portfolio is a record of that process.</p>
+          <div class="bio-layout">
+            <div class="bio-photo">
+              <img src="portrait-photo.jpg" alt="Cameron Kelly">
+            </div>
+            <div class="bio-text">
+              <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
+              <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
+              <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+              <p class="closing">This portfolio is a record of that process.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Core Values collapsible -->
+    <!-- My Core Values -->
     <div class="collapsible" id="col-values">
       <button class="collapsible-trigger" onclick="toggleCollapsible('col-values')">
         My Core Values
@@ -557,14 +515,19 @@
       </div>
     </div>
 
-    <!-- Strengths collapsible -->
+    <!-- My Strengths -->
     <div class="collapsible" id="col-strengths">
       <button class="collapsible-trigger" onclick="toggleCollapsible('col-strengths')">
-        My Strengths <span style="font-size:0.85rem; font-family:'DM Sans',sans-serif; font-weight:300; color:var(--text-muted); margin-left:10px;">Gallup Clifton Strengthsfinder</span>
+        My Strengths
         <span class="collapsible-icon"></span>
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
+          <!--
+          <a class="gallup-attribution" href="https://www.gallup.com/cliftonstrengths/en/253715/34-cliftonstrengths-themes.aspx" target="_blank" rel="noopener">
+            <u>Gallup Clifton Strengthsfinder</u> &nbsp;↗
+          </a>
+          -->
           <div class="entry">
             <div class="entry-name"><span class="entry-divider"></span>Analytical</div>
             <p>I gather information into a structured system, work to deeply understand how things work together, and summarize what I find into something useful for others. I've built much of my career in brewing and distilling on this strength.</p>
@@ -589,64 +552,67 @@
       </div>
     </div>
 
-  </div>
-</div>
+    <!-- My Future -->
+    <div class="collapsible" id="col-future">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-future')">
+        My Future
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <p class="timeline-intro">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3–5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
 
-<!-- MY FUTURE / TIMELINE -->
-<section class="timeline-section">
-  <div class="container">
-    <div class="section-label">My Future</div>
-    <h2>The Road Ahead</h2>
+          <div class="timeline">
 
-    <p class="timeline-intro">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3-5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
+            <div class="milestone current" data-milestone>
+              <div class="year-label"><span>2025–2027</span></div>
+              <div class="dot-wrapper"><div class="dot"></div></div>
+              <div class="milestone-content">
+                <span class="milestone-tag tag-now">Now</span>
+                <h3>Complete the B.A.S. in Leadership &amp; Management</h3>
+                <p>Returning to school is a deliberate pivot toward making my skills transferable. Not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+              </div>
+            </div>
 
-    <div class="timeline">
+            <div class="milestone" data-milestone>
+              <div class="year-label"><span>2025–2026</span></div>
+              <div class="dot-wrapper"><div class="dot"></div></div>
+              <div class="milestone-content">
+                <span class="milestone-tag tag-near">Near Term</span>
+                <h3>Transition from Solo Operator to People Manager</h3>
+                <p>My company is scaling and plans to hire 2–3 direct reports in my department. The goal is to successfully move from managing day-to-day operations alone to managing and developing people, which means moving beyond production oversight to focus on the human systems of a business.</p>
+              </div>
+            </div>
 
-      <div class="milestone current" data-milestone>
-        <div class="year-label"><span>2025 &ndash; 2027</span></div>
-        <div class="dot-wrapper"><div class="dot"></div></div>
-        <div class="milestone-content">
-          <span class="milestone-tag tag-now">Now</span>
-          <h3>Complete the B.A.S. in Leadership &amp; Management</h3>
-          <p>Returning to school is a deliberate pivot toward making my skills transferable. Not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+            <div class="milestone future" data-milestone>
+              <div class="year-label"><span>2028–2030</span></div>
+              <div class="dot-wrapper"><div class="dot"></div></div>
+              <div class="milestone-content">
+                <span class="milestone-tag tag-mid">Mid Term</span>
+                <h3>VP of Operations or General Manager</h3>
+                <p>Whether I stay in the alcohol industry or move into a new sector, the goal is to be a leader who can translate complex problems into manageable processes in any environment.</p>
+              </div>
+            </div>
+
+            <div class="milestone future" data-milestone>
+              <div class="year-label"><span>Beyond</span></div>
+              <div class="dot-wrapper"><div class="dot"></div></div>
+              <div class="milestone-content">
+                <span class="milestone-tag tag-long">Long Term</span>
+                <h3>Strategic Consulting</h3>
+                <p>In the future, I see myself moving into a role as the external expert who helps others navigate the chaos and avoid the landmines I've already mapped.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="timeline-footer">This portfolio is a living document and will be updated throughout the program.</p>
         </div>
       </div>
-
-      <div class="milestone" data-milestone>
-        <div class="year-label"><span>2025 &ndash; 2026</span></div>
-        <div class="dot-wrapper"><div class="dot"></div></div>
-        <div class="milestone-content">
-          <span class="milestone-tag tag-near">Near Term</span>
-          <h3>Transition from Solo Operator to People Manager</h3>
-          <p>My company is scaling and plans to hire 2-3 direct reports in my department. The goal is to successfully move from managing day-to-day operations alone to managing and developing people, which means moving beyond production oversight to focus on the human systems of a business.</p>
-        </div>
-      </div>
-
-      <div class="milestone future" data-milestone>
-        <div class="year-label"><span>2028 &ndash; 2030</span></div>
-        <div class="dot-wrapper"><div class="dot"></div></div>
-        <div class="milestone-content">
-          <span class="milestone-tag tag-mid">Mid Term</span>
-          <h3>VP of Operations or General Manager</h3>
-          <p>Whether I stay in the alcohol industry or move into a new sector, the goal is to be a leader who can translate complex problems into manageable processes in any environment.</p>
-        </div>
-      </div>
-
-      <div class="milestone future" data-milestone>
-        <div class="year-label"><span>Beyond</span></div>
-        <div class="dot-wrapper"><div class="dot"></div></div>
-        <div class="milestone-content">
-          <span class="milestone-tag tag-long">Long Term</span>
-          <h3>Strategic Consulting</h3>
-          <p>In the future, I see myself moving into a role as the external expert who helps others navigate the chaos and avoid the landmines I've already mapped.</p>
-        </div>
-      </div>
-
     </div>
 
-    <p class="timeline-footer">This portfolio is a living document and will be updated throughout the program.</p>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -654,25 +620,17 @@
 </footer>
 
 <script>
-  // Collapsible toggle
   function toggleCollapsible(id) {
-    const el = document.getElementById(id);
-    el.classList.toggle('open');
+    document.getElementById(id).classList.toggle('open');
+    // Trigger milestone animations when My Future opens
+    if (id === 'col-future') {
+      setTimeout(() => {
+        document.querySelectorAll('[data-milestone]').forEach((m, i) => {
+          setTimeout(() => m.classList.add('visible'), i * 150);
+        });
+      }, 80);
+    }
   }
-
-  // Scroll-triggered milestone animation
-  const milestones = document.querySelectorAll('[data-milestone]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 150);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  milestones.forEach(m => observer.observe(m));
 </script>
 
 </body>
