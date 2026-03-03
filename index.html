@@ -280,15 +280,17 @@
   }
   .entry:last-child { margin-bottom: 0; }
 
-  .entry-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
+.entry-name {
+    display: inline;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: var(--brown);
-    margin-bottom: 6px;
   }
 
-  .entry p { font-size: 0.95rem; color: #444; line-height: 1.75; }
+  .entry p { display: inline; font-size: 0.95rem; color: #444; line-height: 1.75; }
+
+  .entry-sep { display: inline; color: var(--gold-dark); margin: 0 5px; }
 
   .entry-divider { display: none; }
 
@@ -544,10 +546,7 @@
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
-          <div class="entry fade-in">
-            <div class="entry-name"><span class="entry-divider"></span>Curiosity</div>
-            <p>Constantly learning and staying genuinely engaged with new people and ideas is something I work at deliberately. It drives me to keep asking why until I actually understand something, and then to turn that understanding into something useful for the people around me.</p>
-          </div>
+      <div class="entry fade-in"><span class="entry-name">Curiosity</span><span class="entry-sep">&mdash;</span><p>Constantly learning and staying genuinely engaged with new people and ideas is something I work at deliberately. It drives me to keep asking why until I actually understand something, and then to turn that understanding into something useful for the people around me.</p></div>
           <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Optimism</div>
             <p>Being willing to invest time and energy into things that won't pay off for a long time requires a genuine belief that the future is worth building toward. Most of the work I do operates on timelines measured in years, sometimes decades, and that's only sustainable if you actually believe in where you're headed.</p>
