@@ -297,11 +297,12 @@
   .timeline::before {
     content: '';
     position: absolute;
-    left: 100px;
+    left: 99px;
     top: 12px;
     bottom: 12px;
-    width: 1px;
+    width: 2px;
     background: linear-gradient(to bottom, var(--gold), var(--gold-dark), var(--brown));
+    z-index: 0;
   }
 
   .milestone {
@@ -330,6 +331,8 @@
     display: flex;
     justify-content: center;
     padding-top: 8px;
+    position: relative;
+    z-index: 1;
   }
 
   .dot {
@@ -337,16 +340,32 @@
     border-radius: 50%;
     background: var(--gold);
     border: 2px solid var(--cream);
-    box-shadow: 0 0 0 1px var(--gold);
+    box-shadow: 0 0 0 1.5px var(--gold);
   }
+  /* Now  → gold */
   .milestone.current .dot {
-    width: 14px; height: 14px;
-    background: var(--gold-dark);
-    box-shadow: 0 0 0 3px rgba(139,111,78,0.2);
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1.5px var(--gold);
   }
-  .milestone.future .dot {
-    background: var(--brown);
-    box-shadow: 0 0 0 1px var(--brown);
+  /* Near Term → rust */
+  .milestone.near .dot {
+    background: #b07050;
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1.5px #b07050;
+  }
+  /* Mid Term → brown */
+  .milestone.future.mid .dot {
+    background: var(--gold-dark);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1.5px var(--gold-dark);
+  }
+  /* Long Term → sage */
+  .milestone.future.long .dot {
+    background: #8aaa8a;
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1.5px #8aaa8a;
   }
 
   .milestone-content { flex: 1; padding-left: 24px; }
@@ -570,6 +589,7 @@
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
+          <p style="font-size:0.95rem; color:#444; line-height:1.85; margin-bottom:28px;">In Fall 2025, as part of my first term in the BAS program, I completed the <a href="https://www.gallup.com/cliftonstrengths/en/253715/34-cliftonstrengths-themes.aspx" target="_blank" rel="noopener" style="color:var(--gold-dark); text-decoration:underline; text-underline-offset:3px;">Gallup CliftonStrengths assessment</a>. The results weren't a surprise so much as a confirmation, a way to put names to patterns I'd already recognized in myself. My top five themes span Strategic Thinking and Relationship Building.</p>
           <div class="entry"><div class="entry-dot dot-brown"></div><div class="entry-text"><span class="entry-name">Analytical</span><span class="entry-sep">&mdash;</span><p>I gather information into a structured system, work to deeply understand how things work together, and summarize what I find into something useful for others. I've built much of my career in brewing and distilling on this strength.</p></div></div>
           <div class="entry"><div class="entry-dot dot-sage"></div><div class="entry-text"><span class="entry-name">Empathy</span><span class="entry-sep">&mdash;</span><p>I pay attention to how someone's emotional state affects others and a group's performance, not just how it affects the individual. I tend to notice when something is off before it gets said out loud, and I try to do something about it early enough to matter.</p></div></div>
           <div class="entry"><div class="entry-dot dot-gold"></div><div class="entry-text"><span class="entry-name">Positivity</span><span class="entry-sep">&mdash;</span><p>Enthusiasm is contagious, and I've learned to use that deliberately. Being able to lead a narrative with genuine optimism is a powerful tool, and when it's authentic it can help build successful teams through almost anything.</p></div></div>
@@ -600,7 +620,7 @@
               </div>
             </div>
 
-            <div class="milestone">
+            <div class="milestone near">
               <div class="year-label"><span>2025&ndash;2026</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -610,7 +630,7 @@
               </div>
             </div>
 
-            <div class="milestone future">
+            <div class="milestone future mid">
               <div class="year-label"><span>2028&ndash;2030</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -620,7 +640,7 @@
               </div>
             </div>
 
-            <div class="milestone future">
+            <div class="milestone future long">
               <div class="year-label"><span>Beyond</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
