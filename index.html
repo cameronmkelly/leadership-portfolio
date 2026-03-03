@@ -240,20 +240,22 @@
   .collapsible-inner { padding-bottom: 36px; }
 
   /* ── BIOGRAPHY — image top-left, text to the right ── */
-  .bio-layout {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 40px;
-    align-items: start;
-  }
+.bio-layout {
+  display: block;
+}
 
-  .bio-photo img {
-    width: 100%;
-    display: block;
-    border-radius: 2px;
-    filter: sepia(15%) contrast(1.05);
-  }
+.bio-photo {
+  float: left;
+  width: 300px;
+  margin: 0 36px 16px 0;
+}
 
+.bio-photo img {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  filter: sepia(15%) contrast(1.05);
+}
   .bio-text p {
     font-size: 1rem;
     color: #333;
@@ -440,13 +442,13 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
-    :root { --section-pad: 56px; }
-    .container { padding: 0 24px; }
-    .bio-layout { grid-template-columns: 1fr; }
-    .bio-photo img { max-width: 240px; }
-    .timeline::before { left: 68px; }
-    .year-label { width: 48px; font-size: 0.7rem; }
+  .bio-photo {
+    float: none;
+    width: 100%;
+    max-width: 240px;
+    margin: 0 0 24px 0;
   }
+}
 </style>
 </head>
 <body>
