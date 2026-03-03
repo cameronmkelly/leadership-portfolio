@@ -89,33 +89,7 @@
     color: rgba(255,255,255,0.65);
   }
 
-  .hero-scroll {
-    position: absolute;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    animation: bounce 2s infinite;
-  }
-  .hero-scroll::after {
-    content: '';
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%       { transform: translateX(-50%) translateY(6px); }
-  }
-
-  /* ── QUOTE — light, no heavy brown box ── */
+  /* ── QUOTE ── */
   .definition-band {
     padding: 44px 24px;
     text-align: center;
@@ -216,12 +190,12 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
   .collapsible-icon::before {
-    width: 14px; height: 1.5px;
+    width: 14px; height: 2px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
   .collapsible-icon::after {
-    width: 1.5px; height: 14px;
+    width: 2px; height: 14px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -235,27 +209,35 @@
     overflow: hidden;
     transition: max-height 0.45s ease;
   }
-  .collapsible.open .collapsible-body { max-height: 3000px; }
-
+  .collapsible.open .collapsible-body { max-height: 4000px; }
   .collapsible-inner { padding-bottom: 36px; }
 
-  /* ── BIOGRAPHY — image top-left, text to the right ── */
-.bio-layout {
-  display: block;
-}
+  /* ── FADE-IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-.bio-photo {
-  float: left;
-  width: 300px;
-  margin: 0 36px 16px 0;
-}
+  /* ── BIOGRAPHY ── */
+  .bio-layout { display: block; }
 
-.bio-photo img {
-  width: 100%;
-  display: block;
-  border-radius: 2px;
-  filter: sepia(15%) contrast(1.05);
-}
+  .bio-photo {
+    float: left;
+    width: 300px;
+    margin: 0 36px 16px 0;
+  }
+  .bio-photo img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    filter: sepia(15%) contrast(1.05);
+  }
+
   .bio-text p {
     font-size: 1rem;
     color: #333;
@@ -270,7 +252,7 @@
     color: var(--brown-light);
   }
 
-  /* ── ENTRIES ── */
+  /* ── ENTRIES (values / strengths) ── */
   .entry {
     margin-bottom: 28px;
     padding-bottom: 28px;
@@ -296,24 +278,6 @@
     margin: 0 10px 2px 0;
   }
 
-  /* ── GALLUP LINK ── */
-  .gallup-attribution {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    color: var(--gold-dark);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    width: 100%;
-    transition: color 0.2s;
-  }
-  .gallup-attribution:hover { color: var(--brown); }
-  .gallup-attribution u { text-decoration-color: var(--gold); text-underline-offset: 3px; }
-
   /* ── TIMELINE ── */
   .timeline-intro {
     font-size: 1rem;
@@ -338,11 +302,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 44px;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .milestone.visible { opacity: 1; transform: translateY(0); }
   .milestone:last-child { margin-bottom: 0; }
 
   .year-label {
@@ -408,7 +368,6 @@
     margin-bottom: 8px;
     line-height: 1.3;
   }
-
   .milestone-content p {
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -442,13 +401,28 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
-  .bio-photo {
-    float: none;
-    width: 100%;
-    max-width: 240px;
-    margin: 0 0 24px 0;
+    :root { --section-pad: 56px; }
+    .container { padding: 0 24px; }
+
+    .bio-photo {
+      float: none;
+      width: 100%;
+      max-width: 240px;
+      margin: 0 0 24px 0;
+    }
+
+    .timeline::before { display: none; }
+    .milestone {
+      flex-direction: column;
+      gap: 6px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .milestone:last-child { border-bottom: none; padding-bottom: 0; }
+    .year-label { width: auto; text-align: left; }
+    .dot-wrapper { display: none; }
+    .milestone-content { padding-left: 0; }
   }
-}
 </style>
 </head>
 <body>
@@ -461,7 +435,6 @@
     <p class="hero-title">Operations &amp; Production Leader</p>
     <p class="hero-tags">Spirits Production &nbsp;|&nbsp; Product Development &nbsp;|&nbsp; Facility Startup &nbsp;|&nbsp; Regulatory Compliance</p>
   </div>
-  <!-- <div class="hero-scroll">Scroll</div> -->
 </header>
 
 <!-- QUOTE -->
@@ -469,7 +442,7 @@
   <blockquote>A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</blockquote>
 </div>
 
-<!-- ABOUT ME — all collapsibles in one section -->
+<!-- ABOUT ME -->
 <div class="collapsibles-section">
   <div class="container">
     <div class="section-label">About Me</div>
@@ -483,14 +456,14 @@
       <div class="collapsible-body">
         <div class="collapsible-inner">
           <div class="bio-layout">
-            <div class="bio-photo">
+            <div class="bio-photo fade-in">
               <img src="portrait-photo.jpg" alt="Cameron Kelly">
             </div>
             <div class="bio-text">
-              <p>I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
-              <p>Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
-              <p>I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
-              <p class="closing">This portfolio is a record of that process.</p>
+              <p class="fade-in">I'm an operations leader with over 15 years of experience in regulated beverage manufacturing, spanning brewing, distillation, whiskey blending, and packaging. My career has been built on the intersection of hands-on problem solving and systems thinking. I've helped build facilities from the ground up, developed new products from scratch touching everything from recipe and brand development to packaging, distribution, and consumer events, and designed practical tools for forecasting, compliance, and cross-functional execution.</p>
+              <p class="fade-in">Along the way, leadership kept finding me. I've run brewing and packaging crews, stepped into a Director of Sales role managing a dispersed team and multi-state distributor relationships, and regularly found myself as the person others looked to when something needed to get figured out, even when that wasn't in the job description.</p>
+              <p class="fade-in">I'm currently pursuing a B.A.S. in Leadership and Management at Chemeketa, not to learn what leadership looks like in theory, but to sharpen the language and frameworks around what I've already been doing, and to close the gaps I know are there.</p>
+              <p class="closing fade-in">This portfolio is a record of that process.</p>
             </div>
           </div>
         </div>
@@ -505,11 +478,11 @@
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Curiosity</div>
             <p>Constantly learning and staying genuinely engaged with new people and ideas is something I work at deliberately. It drives me to keep asking why until I actually understand something, and then to turn that understanding into something useful for the people around me.</p>
           </div>
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Optimism</div>
             <p>Being willing to invest time and energy into things that won't pay off for a long time requires a genuine belief that the future is worth building toward. Most of the work I do operates on timelines measured in years, sometimes decades, and that's only sustainable if you actually believe in where you're headed.</p>
           </div>
@@ -530,23 +503,23 @@
             <u>Gallup Clifton Strengthsfinder</u> &nbsp;↗
           </a>
           -->
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Analytical</div>
             <p>I gather information into a structured system, work to deeply understand how things work together, and summarize what I find into something useful for others. I've built much of my career in brewing and distilling on this strength.</p>
           </div>
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Empathy</div>
             <p>I pay attention to how someone's emotional state affects others and a group's performance, not just how it affects the individual. I tend to notice when something is off before it gets said out loud, and I try to do something about it early enough to matter.</p>
           </div>
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Positivity</div>
             <p>Enthusiasm is contagious, and I've learned to use that deliberately. Being able to lead a narrative with genuine optimism is a powerful tool, and when it's authentic it can help build successful teams through almost anything.</p>
           </div>
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Intellection</div>
             <p>I've worked to develop expertise by being very methodical about how I learn things. The pitfall is getting mired in research instead of moving into actual skill development, so I try to use that depth to raise the collective knowledge base of the team rather than keeping it to myself.</p>
           </div>
-          <div class="entry">
+          <div class="entry fade-in">
             <div class="entry-name"><span class="entry-divider"></span>Restorative</div>
             <p>This has been a constant guiding force in my life. Bringing creative solutions to help solve a problem is one of the skills that has helped me the most in my career, and I have a track record of recovering projects that others had written off. I'm working on applying that same diagnostic energy upstream, to the processes and communication breakdowns that allow failure to happen in the first place.</p>
           </div>
@@ -562,11 +535,10 @@
       </button>
       <div class="collapsible-body">
         <div class="collapsible-inner">
-          <p class="timeline-intro">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3–5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
+          <p class="timeline-intro fade-in">My expertise is currently rooted in alcohol manufacturing, but my real skill set is in managing complex manufacturing environments, navigating regulatory hurdles, and building data-driven systems. In the next 3–5 years, I want to solidify my ability to manage large, diverse teams as a VP of Operations or General Manager, moving beyond production oversight to focus on the human systems of a business.</p>
 
           <div class="timeline">
-
-            <div class="milestone current" data-milestone>
+            <div class="milestone current fade-in">
               <div class="year-label"><span>2025–2027</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -576,7 +548,7 @@
               </div>
             </div>
 
-            <div class="milestone" data-milestone>
+            <div class="milestone fade-in">
               <div class="year-label"><span>2025–2026</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -586,7 +558,7 @@
               </div>
             </div>
 
-            <div class="milestone future" data-milestone>
+            <div class="milestone future fade-in">
               <div class="year-label"><span>2028–2030</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -596,7 +568,7 @@
               </div>
             </div>
 
-            <div class="milestone future" data-milestone>
+            <div class="milestone future fade-in">
               <div class="year-label"><span>Beyond</span></div>
               <div class="dot-wrapper"><div class="dot"></div></div>
               <div class="milestone-content">
@@ -605,10 +577,9 @@
                 <p>In the future, I see myself moving into a role as the external expert who helps others navigate the chaos and avoid the landmines I've already mapped.</p>
               </div>
             </div>
-
           </div>
 
-          <p class="timeline-footer">This portfolio is a living document and will be updated throughout the program.</p>
+          <p class="timeline-footer fade-in">This portfolio is a living document and will be updated throughout the program.</p>
         </div>
       </div>
     </div>
@@ -624,15 +595,31 @@
 <script>
   function toggleCollapsible(id) {
     document.getElementById(id).classList.toggle('open');
-    // Trigger milestone animations when My Future opens
-    if (id === 'col-future') {
-      setTimeout(() => {
-        document.querySelectorAll('[data-milestone]').forEach((m, i) => {
-          setTimeout(() => m.classList.add('visible'), i * 150);
-        });
-      }, 80);
-    }
+    // After the collapsible starts opening, trigger fade-ins inside it
+    setTimeout(() => triggerFadeIns(), 80);
   }
+
+  function triggerFadeIns() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Find index among unvisited siblings for stagger
+          const parent = entry.target.closest('.collapsible-inner') || document.body;
+          const siblings = Array.from(parent.querySelectorAll('.fade-in:not(.visible)'));
+          const idx = siblings.indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, Math.max(0, idx) * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
+  }
+
+  // Run once on load for anything in view
+  triggerFadeIns();
 </script>
 
 </body>
