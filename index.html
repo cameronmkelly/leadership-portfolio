@@ -33,9 +33,9 @@
   /* ── HERO ── */
   .hero {
     position: relative;
-    height: 52vh;
-    min-height: 340px;
-    max-height: 520px;
+    min-height: 480px;
+    height: 62vh;
+    max-height: 640px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,15 +48,28 @@
     background-image: url('header-photo.jpg');
     background-size: cover;
     background-position: center 60%;
-    filter: brightness(0.45);
+    filter: brightness(0.4);
+  }
+
+  /* Gradient fade at the bottom so quote blends in */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.45) 100%);
   }
 
   .hero-content {
     position: relative;
     text-align: center;
     color: white;
-    padding: 0 24px;
+    padding: 0 32px;
+    max-width: 820px;
     animation: heroFade 1.2s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
   }
 
   @keyframes heroFade {
@@ -69,7 +82,7 @@
     font-size: clamp(2.4rem, 7vw, 5rem);
     font-weight: 400;
     letter-spacing: -0.01em;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     line-height: 1.1;
   }
 
@@ -86,41 +99,48 @@
     font-weight: 300;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 32px;
   }
 
-  /* ── QUOTE ── */
-  .definition-band {
-    padding: 44px 24px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    background: var(--cream);
+  /* Thin gold rule separating tags from quote */
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 24px;
   }
 
-  .definition-band blockquote {
+  .hero-quote {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
     font-style: italic;
-    color: var(--brown-light);
-    max-width: 720px;
-    margin: 0 auto;
-    line-height: 1.65;
     font-weight: 400;
-    position: relative;
-    padding: 0 40px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.72);
+    max-width: 620px;
   }
 
-  .definition-band blockquote::before,
-  .definition-band blockquote::after {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    color: var(--gold);
-    line-height: 0;
-    position: absolute;
-    top: 18px;
+  .hero-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 16px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
   }
-  .definition-band blockquote::before { content: '\201C'; left: 0; }
-  .definition-band blockquote::after  { content: '\201D'; right: 0; }
+  .hero-linkedin:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
 
   /* ── LAYOUT ── */
   .container {
@@ -254,29 +274,23 @@
 
   /* ── ENTRIES (values / strengths) ── */
   .entry {
-    margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
+    padding: 14px 0 14px 16px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 12px;
   }
-  .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .entry:last-child { margin-bottom: 0; }
 
   .entry-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--brown);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
-  .entry p { font-size: 0.95rem; color: #444; line-height: 1.8; }
+  .entry p { font-size: 0.95rem; color: #444; line-height: 1.75; }
 
-  .entry-divider {
-    display: inline-block;
-    width: 24px; height: 1px;
-    background: var(--gold);
-    vertical-align: middle;
-    margin: 0 10px 2px 0;
-  }
+  .entry-divider { display: none; }
 
   /* ── TIMELINE ── */
   .timeline-intro {
@@ -386,17 +400,72 @@
   /* ── FOOTER ── */
   footer {
     background: var(--brown);
-    padding: 48px 40px;
-    text-align: center;
+    padding: 40px 40px;
     color: rgba(255,255,255,0.4);
     font-size: 0.8rem;
     letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
   }
   footer span {
     color: var(--gold);
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 0.9rem;
+  }
+  .footer-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .footer-linkedin:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+
+  /* ── PROGRAM OUTCOMES ── */
+  .outcomes-section {
+    padding: var(--section-pad) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .outcome-description {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-style: italic;
+    padding: 0 0 8px 16px;
+    border-left: 3px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .placeholder-note {
+    margin-top: 24px;
+    padding: 20px 20px;
+    border: 1px dashed var(--border);
+    border-radius: 2px;
+  }
+
+  .placeholder-note p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+    line-height: 1.7;
   }
 
   /* ── RESPONSIVE ── */
@@ -434,13 +503,10 @@
     <h1>Cameron Kelly</h1>
     <p class="hero-title">Operations &amp; Production Leader</p>
     <p class="hero-tags">Spirits Production &nbsp;|&nbsp; Product Development &nbsp;|&nbsp; Facility Startup &nbsp;|&nbsp; Regulatory Compliance</p>
+    <div class="hero-divider"></div>
+    <p class="hero-quote">A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</p>
   </div>
 </header>
-
-<!-- QUOTE -->
-<div class="definition-band">
-  <blockquote>A good leader helps point people in the right direction, ensures they have the tools they need, and then steps back so the team can move toward a common goal.</blockquote>
-</div>
 
 <!-- ABOUT ME -->
 <div class="collapsibles-section">
@@ -587,29 +653,86 @@
   </div>
 </div>
 
+
+<!-- PROGRAM OUTCOMES -->
+<div class="outcomes-section">
+  <div class="container">
+    <div class="section-label">Program Outcomes</div>
+
+    <!-- Think Like a Leader -->
+    <div class="collapsible" id="col-think">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-think')">
+        Think Like a Leader
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <p class="outcome-description">Key shifts in how I think about leadership: frameworks, mental models, and perspectives gained through coursework and reflection.</p>
+          <div class="placeholder-note">
+            <p>This section will be updated throughout the program with key learning moments, reflections, and artifacts that capture growth in leadership thinking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Act Like a Leader -->
+    <div class="collapsible" id="col-act">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-act')">
+        Act Like a Leader
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <p class="outcome-description">Leadership put into practice. What I did, what worked, and what I would do differently.</p>
+          <div class="placeholder-note">
+            <p>This section will be updated throughout the program with examples of leadership in action, lessons learned, and evidence of growth.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Opportunities to Lead -->
+    <div class="collapsible" id="col-create">
+      <button class="collapsible-trigger" onclick="toggleCollapsible('col-create')">
+        Create Opportunities to Lead
+        <span class="collapsible-icon"></span>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-inner">
+          <p class="outcome-description">Ways I have sought out, built, or expanded leadership opportunities for myself and others.</p>
+          <div class="placeholder-note">
+            <p>This section will be updated throughout the program with examples of how I've created or expanded leadership opportunities for myself and others.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p><span>Cameron Kelly</span> &nbsp;&mdash;&nbsp; Leadership Portfolio &nbsp;&mdash;&nbsp; Chemeketa Community College BAS Leadership &amp; Management</p>
+  <a class="footer-linkedin" href="https://www.linkedin.com/in/cameronkellyoperations/" target="_blank" rel="noopener">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    LinkedIn
+  </a>
 </footer>
 
 <script>
   function toggleCollapsible(id) {
     document.getElementById(id).classList.toggle('open');
-    // After the collapsible starts opening, trigger fade-ins inside it
     setTimeout(() => triggerFadeIns(), 80);
   }
 
   function triggerFadeIns() {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Find index among unvisited siblings for stagger
           const parent = entry.target.closest('.collapsible-inner') || document.body;
           const siblings = Array.from(parent.querySelectorAll('.fade-in:not(.visible)'));
           const idx = siblings.indexOf(entry.target);
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, Math.max(0, idx) * 80);
+          setTimeout(() => entry.target.classList.add('visible'), Math.max(0, idx) * 80);
           observer.unobserve(entry.target);
         }
       });
@@ -618,7 +741,6 @@
     document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
   }
 
-  // Run once on load for anything in view
   triggerFadeIns();
 </script>
 
