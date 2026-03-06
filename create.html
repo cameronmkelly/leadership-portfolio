@@ -245,6 +245,21 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── SHALLOW HERO ── */
+  .shallow-hero {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+  }
+  .shallow-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('header-photo.jpg');
+    background-size: cover;
+    background-position: center 60%;
+    filter: brightness(0.35);
+  }
+
   /* ── SITE NAV ── */
   .site-nav {
     background: white;
@@ -420,6 +435,10 @@
 <body>
 
 
+<div class="shallow-hero">
+  <div class="shallow-hero-bg"></div>
+</div>
+
 <nav class="site-nav">
   <div class="site-nav-inner">
     <a class="site-nav-back" href="index.html">
@@ -461,29 +480,21 @@
       <div class="artifact-card-body">
         <div class="artifact-label">Project</div>
         <div class="artifact-title">Operations Guide</div>
-        <p>One of the most persistent problems in small operations is that critical knowledge lives in one person's head. When that person is unavailable, things break. I built the Operations Guide specifically to solve that problem before it becomes a crisis — a cross-linked, navigable system that documents every procedure, piece of equipment, and vendor relationship so that other people can operate confidently without needing me in the room. I've started sharing it with colleagues for feedback, and the longer-term goal is to make this framework available to other small operations facing the same gaps I've spent years running into.</p>
+        <p>One of the most persistent problems in small operations is that critical knowledge lives in one person's head. When that person is unavailable, things break. I built the Operations Guide specifically to solve that problem before it becomes a crisis. A cross-linked, navigable system that documents every procedure, piece of equipment, and vendor relationship so that other people can operate confidently without needing me in the room. I've started sharing it with colleagues for feedback, and the longer-term goal is to make this framework available to other small operations facing the same gaps I've spent years running into.</p>
       </div>
-      <div class="artifact-card-footer">
-        <span class="artifact-meta">Web &nbsp;&middot;&nbsp; Ongoing</span>
-        <a class="artifact-link" href="https://cameronmkelly.github.io/ops-guide" target="_blank" rel="noopener">
-          View Project
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="iframe-preview" style="border-top:1px solid var(--border); border-radius:0;">
+        <div class="iframe-label">
+          <span class="iframe-label-text">Operations Guide &mdash; Homepage</span>
+          <a href="https://cameronmkelly.github.io/ops-guide" target="_blank" rel="noopener">
+            Open full site
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <iframe src="https://cameronmkelly.github.io/ops-guide" title="Operations Guide" loading="lazy"></iframe>
       </div>
     </div>
 
-    <div class="iframe-preview">
-      <div class="iframe-label">
-        <span class="iframe-label-text">Operations Guide &mdash; Homepage</span>
-        <a href="https://cameronmkelly.github.io/ops-guide" target="_blank" rel="noopener">
-          Open full site
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-      <iframe src="https://cameronmkelly.github.io/ops-guide" title="Operations Guide" loading="lazy"></iframe>
-    </div>
-
-    <div class="placeholder-note">
+    <div class="placeholder-note" style="margin-top:32px;">
       <p>This section will be updated throughout the program with additional examples of how I've created or expanded leadership opportunities for myself and others.</p>
     </div>
   </div>
