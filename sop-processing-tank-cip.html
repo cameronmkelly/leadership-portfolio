@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Processing Tank CIP | Operations Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f2ed;
+    --gold: #c9a96e;
+    --gold-dark: #8b6f4e;
+    --brown: #4a3728;
+    --brown-light: #6b4f35;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --text-light: #999;
+    --border: #ddd5c8;
+    --danger-bg: #fff5f5;
+    --danger-border: #e8c5c5;
+    --danger-text: #8b2a2a;
+    --warning-bg: #fffbf0;
+    --warning-border: #e8d9b0;
+    --warning-text: #7a5c1e;
+    --tip-bg: #f0f5f0;
+    --tip-border: #b8d4b8;
+    --tip-text: #2a5a2a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 0.94rem;
+  }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+  }
+  .site-nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .site-nav-back:hover { color: var(--gold-dark); }
+  .site-nav-back:hover svg { transform: translateX(-2px); }
+  .site-nav-back svg { transition: transform 0.2s; }
+  .site-nav-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    min-height: calc(100vh - 100px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    border-right: 1px solid var(--border);
+    padding: 32px 24px;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-title {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 14px;
+  }
+
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav li { margin-bottom: 2px; }
+  .sidebar-nav a {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.4;
+  }
+  .sidebar-nav a:hover { background: rgba(201,169,110,0.1); color: var(--brown); }
+  .sidebar-nav .sub { padding-left: 18px; font-size: 0.74rem; }
+
+  .sidebar-meta {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .sidebar-meta-row {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+  .sidebar-meta-row strong {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    color: var(--warning-text);
+    margin-top: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    padding: 40px 56px 80px;
+  }
+
+  .sop-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--brown);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .sop-meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .sop-meta-item {
+    font-size: 0.72rem;
+    color: var(--text-light);
+  }
+  .sop-meta-item strong {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 2px;
+  }
+
+  /* purpose/scope block */
+  .intro-block {
+    margin-bottom: 28px;
+    padding: 20px 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .intro-block p { margin-bottom: 10px; color: var(--text-muted); }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { color: var(--brown); font-weight: 500; }
+
+  /* ── SECTIONS ── */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin: 28px 0 12px;
+  }
+
+  p { margin-bottom: 12px; color: var(--text-muted); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    margin: 16px 0;
+    padding: 14px 18px;
+    border-radius: 2px;
+    border-left: 3px solid;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .callout-danger {
+    background: var(--danger-bg);
+    border-color: #c0392b;
+    color: var(--danger-text);
+  }
+  .callout-warning {
+    background: var(--warning-bg);
+    border-color: #e6a817;
+    color: var(--warning-text);
+  }
+  .callout-tip {
+    background: var(--tip-bg);
+    border-color: #5a9a5a;
+    color: var(--tip-text);
+  }
+  .callout-icon { margin-right: 6px; }
+  .callout strong { font-weight: 500; }
+  .callout p { color: inherit; margin-bottom: 6px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ── LISTS ── */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+    color: var(--text-muted);
+  }
+  li { margin-bottom: 6px; line-height: 1.7; }
+  li strong { color: var(--brown); font-weight: 500; }
+  ol ol, ul ul, ol ul { margin-top: 6px; margin-bottom: 6px; }
+
+  /* ── DECISION TREE ── */
+  .tier-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.86rem;
+  }
+  .tier-table th {
+    background: var(--brown);
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .tier-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .tier-table tr:last-child td { border-bottom: none; }
+  .tier-table tr:nth-child(even) td { background: rgba(255,255,255,0.5); }
+  .tier-label {
+    font-weight: 500;
+    color: var(--brown);
+    white-space: nowrap;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(221,213,200,0.4);
+    font-size: 0.88rem;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    background: white;
+  }
+
+  /* ── PHASE HEADER ── */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0 20px;
+    padding: 16px 20px;
+    background: var(--brown);
+    border-radius: 2px;
+  }
+  .phase-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .phase-title-wrap {}
+  .phase-label {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 2px;
+  }
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.2;
+  }
+
+  /* ── NEXT STEP ── */
+  .next-step {
+    margin: 24px 0 8px;
+    padding: 14px 18px;
+    background: rgba(201,169,110,0.08);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 2px;
+    font-size: 0.86rem;
+    color: var(--gold-dark);
+  }
+  .next-step strong { font-weight: 500; }
+
+  /* ── TROUBLESHOOTING ── */
+  .trouble-item {
+    margin-bottom: 16px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .trouble-item h4 {
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+  .trouble-item ul { margin-bottom: 0; }
+
+  /* ── LOG TABLE ── */
+  .log-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .log-field {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: white;
+  }
+  .log-field-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 4px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: 28px 24px 60px; }
+    .breadcrumb { padding: 12px 24px; }
+    .site-header { padding: 14px 24px; }
+    .log-fields { grid-template-columns: 1fr; }
+    .sop-meta-row { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-back" href="act.html">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Act Like a Leader
+    </a>
+    <span class="site-nav-label">SOP — Processing Tank CIP</span>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-title">On This Page</div>
+    <ul class="sidebar-nav">
+      <li><a href="#purpose">Purpose & Scope</a></li>
+      <li><a href="#safety">Safety & PPE</a></li>
+      <li><a href="#acceptance">Acceptance Criteria</a></li>
+      <li><a href="#decision">CIP Decision Tree</a></li>
+      <li><a href="#equipment">Equipment & Materials</a></li>
+      <li><a href="#pre-clean">Pre-Cleaning</a></li>
+      <li><a href="#phase1">Phase 1 — CIP Loop Setup</a></li>
+      <li><a href="#phase2">Phase 2 — Detergent Wash</a></li>
+      <li><a href="#phase3">Phase 3 — Acid Rinse</a></li>
+      <li><a href="#phase4">Phase 4 — Cooldown & Rinse</a></li>
+      <li><a href="#phase5">Phase 5 — Teardown</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+
+    <div class="sidebar-meta">
+      <div class="sidebar-meta-row"><strong>Equipment</strong> PT01–PT04</div>
+      <div class="sidebar-meta-row"><strong>Created</strong> Feb 14, 2026</div>
+      <div class="sidebar-meta-row"><strong>Modified</strong> Feb 26, 2026</div>
+      <div class="sidebar-meta-row"><strong>Status</strong><br><span class="status-badge">Draft</span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="sop-label">Standard Operating Procedure</div>
+    <h1 id="purpose">Processing Tank CIP</h1>
+
+    <div class="sop-meta-row">
+      <div class="sop-meta-item"><strong>Tanks</strong>PT01 · PT02 · PT03 · PT04</div>
+      <div class="sop-meta-item"><strong>Chemicals</strong>Sodium Percarbonate · Citric Acid</div>
+      <div class="sop-meta-item"><strong>Systems</strong>Hot Water · RO Water · Compressed Air</div>
+    </div>
+
+    <div class="intro-block">
+      <p><strong>Purpose:</strong> Establish a standardized, tiered process for cleaning 2,000-gallon and 3,500-gallon stainless steel processing tanks using Sodium Percarbonate and Citric Acid. This ensures product purity, prevents cross-contamination, and extends equipment lifespan without over-using chemicals when a simple hot water flush will suffice.</p>
+      <p><strong>Scope:</strong> Applies to all Simple Matters Spirits employees responsible for operating or cleaning the stainless steel processing tanks (PT01 through PT04).</p>
+    </div>
+
+    <!-- SAFETY -->
+    <h2 id="safety">⚠️ Safety &amp; PPE Requirements</h2>
+
+    <div class="callout callout-danger">
+      <p><strong>Vapor/Flash Hazard:</strong> An empty tank that recently held spirit is full of highly flammable ethanol vapor. Do not open the manway until a cold water purge has been completed to knock down the vapor.</p>
+    </div>
+    <div class="callout callout-danger">
+      <p><strong>Implosion Risk:</strong> Rapid cooling of a sealed tank can create a vacuum, leading to catastrophic implosion. You must manually verify that the tank is well-ventilated (manway must be OPEN) before introducing cold water during the final cooldown.</p>
+    </div>
+    <div class="callout callout-warning">
+      <p><strong>Max Temperature:</strong> The Hot Water System delivers water at 165°F. Do not exceed 165°F to protect tank gaskets and seals.</p>
+    </div>
+    <div class="callout callout-warning">
+      <p><strong>Steam Hazard:</strong> During pre-heating, live steam pressure will vent from open side ports and sample valves. Avoid these areas until the tank is up to temperature, then close the valves to prevent chemical spray.</p>
+    </div>
+    <div class="callout callout-danger">
+      <p><strong>Confined Space / Agitator Hazard:</strong> Never enter a tank without following the Confined Space Entry Procedures. Do not break the plane of the manway with your head or torso during visual inspections.</p>
+    </div>
+    <div class="callout callout-warning">
+      <p><strong>Chemical Handling:</strong> Always add chemicals to water, never water to chemicals.</p>
+    </div>
+
+    <h3>Required PPE</h3>
+    <ul>
+      <li>Steel-toe, non-slip shoes</li>
+      <li>Safety glasses or goggles</li>
+      <li>Chemical-resistant gloves and apron</li>
+      <li>Face mask/respirator when handling Sodium Percarbonate or Citric Acid powder</li>
+    </ul>
+
+    <!-- ACCEPTANCE CRITERIA -->
+    <h2 id="acceptance">Cleanliness Acceptance Criteria</h2>
+    <p>A tank is only considered "clean" and ready for a new batch when it meets all of the following:</p>
+    <ul>
+      <li><strong>pH Neutrality:</strong> Final rinse water tests at pH 6.5–7.5 (matching incoming city water)</li>
+      <li><strong>Visual Inspection:</strong> No visible residue, film, or tartrate crystals on interior surfaces</li>
+      <li><strong>Odor:</strong> No off-odors or severe flavor carryover from the previous batch</li>
+    </ul>
+
+    <!-- DECISION TREE -->
+    <h2 id="decision">CIP Decision Tree</h2>
+    <table class="tier-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Method</th>
+          <th>When to Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-label">Tier 1</span></td>
+          <td>Hot Water Flush</td>
+          <td>Routine turnover between batches</td>
+        </tr>
+        <tr>
+          <td><span class="tier-label">Tier 2</span></td>
+          <td>Detergent Wash</td>
+          <td>Transitioning between product types; spirit held &gt;6 months; visible residue after Tier 1</td>
+        </tr>
+        <tr>
+          <td><span class="tier-label">Tier 3</span></td>
+          <td>Acid Rinse</td>
+          <td>After tank maintenance (welding, plumbing, confined space entry); foreign material found; heavy mineral scale</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- EQUIPMENT -->
+    <h2 id="equipment">Equipment &amp; Materials Inventory</h2>
+
+    <figure style="margin: 0 0 28px;">
+      <img src="PT_SOP_Materials.png" alt="Equipment and materials laid out for Processing Tank CIP" style="width:100%; border-radius:2px; border:1px solid var(--border); display:block;">
+      <figcaption style="font-size:0.72rem; color:var(--text-light); margin-top:8px; font-style:italic;">All equipment and materials required for a full CIP cycle.</figcaption>
+    </figure>
+
+    <h3>Hoses &amp; Pump Equipment</h3>
+    <ul class="checklist">
+      <li><span class="check-box"></span>AODD Pump (Pump-01 or Pump-02)</li>
+      <li><span class="check-box"></span>0.5" Clear Vinyl Hose — 10ft (Qty: 1)</li>
+      <li><span class="check-box"></span>1.5" Distillery Hose — 10ft</li>
+      <li><span class="check-box"></span>1.5" Distillery Hose — 20ft</li>
+      <li><span class="check-box"></span>2.0" Distillery Hose — 20ft</li>
+      <li><span class="check-box"></span>Washdown Flex Hose (Hot/Cold Water connection)</li>
+      <li><span class="check-box"></span>Washdown Spray Nozzle</li>
+    </ul>
+
+    <h3>Fittings &amp; Hardware</h3>
+    <ul class="checklist">
+      <li><span class="check-box"></span>1.5" Tri-Clamp (TC) Clamps</li>
+      <li><span class="check-box"></span>1.5" Butterfly Valves</li>
+      <li><span class="check-box"></span>1.5" Tri-Clamp Tees</li>
+      <li><span class="check-box"></span>1.5" Tri-Clamp Sample Valve (pump manifold)</li>
+      <li><span class="check-box"></span>Tri-Clamp Gaskets</li>
+      <li><span class="check-box"></span>Tri-Clamp Mesh Screen / Filter Gasket</li>
+      <li><span class="check-box"></span>Tri-Clamp Sight Glass</li>
+    </ul>
+
+    <h3>Tools &amp; Testing</h3>
+    <ul class="checklist">
+      <li><span class="check-box"></span>3/4" Wrench</li>
+      <li><span class="check-box"></span>Cordless Drill with 3/4" Socket Adapter</li>
+      <li><span class="check-box"></span>Digital Scale</li>
+      <li><span class="check-box"></span>Digital Probe Thermometer</li>
+      <li><span class="check-box"></span>Infrared (IR) Thermometer</li>
+      <li><span class="check-box"></span>pH Test Strips</li>
+      <li><span class="check-box"></span>Plastic Beaker</li>
+      <li><span class="check-box"></span>Glass Beaker (chemical measuring/testing)</li>
+      <li><span class="check-box"></span>Sample Tube/Vial</li>
+      <li><span class="check-box"></span>Flashlight (tank inspection)</li>
+      <li><span class="check-box"></span>Long-handled Cleaning Brush</li>
+      <li><span class="check-box"></span>Large Stainless Steel Bucket</li>
+    </ul>
+
+    <h3>Utilities &amp; Chemicals</h3>
+    <ul class="checklist">
+      <li><span class="check-box"></span>Compressed Air System connection</li>
+      <li><span class="check-box"></span>Hot Water System connection</li>
+      <li><span class="check-box"></span>RO Water System connection</li>
+      <li><span class="check-box"></span>Sodium Percarbonate — Detergent (alkaline cleaner)</li>
+      <li><span class="check-box"></span>Citric Acid — Anhydrous (acid rinse)</li>
+      <li><span class="check-box"></span>Chemical Dilution Calculator</li>
+    </ul>
+
+    <!-- PRE-CLEANING -->
+    <h2 id="pre-clean">Pre-Cleaning: Vapor Purge &amp; Inspection</h2>
+    <ol>
+      <li><strong>Isolate Agitator:</strong> At the main VFD control panel, press STOP for the specific tank's agitator to ensure it cannot be accidentally activated.</li>
+      <li><strong>Closed-Tank Vapor Purge &amp; Dilution:</strong> Do not open the manway yet. Run cold city water through the CIP spray ball to knock down ethanol vapor and dilute any remaining spirit. Continue until diluted to below 5% ABV.</li>
+      <li><strong>Drain &amp; pH Check:</strong> Test the pH of the diluted liquid to ensure it meets municipal wastewater standards (pH 6.0–9.0). Route drain hose to a trench drain and open to empty the tank.</li>
+      <li><strong>Visual Inspection:</strong> Once drained and purged, open the bottom manway. Do not break the plane of the manway with your head or torso. Use a flashlight or phone camera to visually check interior walls and spray ball for residue.</li>
+      <li>Remove and inspect manway gaskets, valves, and removable parts for buildup or damage.</li>
+      <li>Verify all hoses, the external pump, and the CIP spray ball assembly are clean, connected securely, and in working order.</li>
+    </ol>
+
+    <!-- PHASE 1 -->
+    <div class="phase-header" id="phase1">
+      <div class="phase-num">01</div>
+      <div class="phase-title-wrap">
+        <div class="phase-label">Phase</div>
+        <div class="phase-title">CIP Loop Setup &amp; Pre-Heating — Tier 1 Hot Water Flush</div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p>The supply pressure from the Hot City Water line is not sufficient to completely cover the inside surface of the tank with spray water. A fill-and-recirculate method is required to preheat the tank and perform any cleaning tier.</p>
+    </div>
+
+    <figure style="margin: 20px 0 28px;">
+      <img src="Processing_Tank_Diagram_-_CIP_Loop.png" alt="Processing Tank CIP Loop Diagram" style="width:100%; border-radius:2px; border:1px solid var(--border); display:block;">
+      <figcaption style="font-size:0.72rem; color:var(--text-light); margin-top:8px; font-style:italic;">Route hoses according to this diagram to ensure a continuous, leak-free circulation loop.</figcaption>
+    </figure>
+
+    <ol>
+      <li><strong>Assemble CIP Loop:</strong>
+        <ol>
+          <li>Connect the sight glass to the bottom tank drain. Attach a 2" distillery hose from the sight glass to a T-fitting at the AODD pump inlet.</li>
+          <li>Route the other side of this T-fitting via a 2" hose directly to the trench floor drain.</li>
+          <li>Connect a T-fitting to the pump outlet with butterfly valves on each side (utility inlet for RO/Hot/Cold water).</li>
+          <li>Attach the 1.5" TC Sample Valve to the pump manifold to allow safe chemical sampling during the cycle.</li>
+          <li>Route a 1.5" distillery hose from the pump outlet assembly to the upper tank manifold. Split with a T-fitting to supply both the CIP Ball and Fill Port arm.</li>
+          <li>Attach the 0.5" clear vinyl hose to the sample port and route to a bucket or trench drain.</li>
+        </ol>
+      </li>
+      <li><strong>Open Valves:</strong> Open all bottom drain valves, outlet valves, side ports, and sample ports to ensure airflow and clear pathways.
+        <div class="callout callout-warning" style="margin-top:8px;"><p>Keep your distance from the open side and sample ports as the tank heats up to avoid venting steam.</p></div>
+      </li>
+      <li><strong>Line Flush:</strong> Open the Hot City Water valve. Spray hot water through both the CIP Ball and Fill Port arms until water runs hot (~2 minutes). Close the Fill Port arm valve to direct all flow through the CIP ball.</li>
+      <li><strong>Preheat Tank:</strong> Dose Hot City Water directly into the tank until the water level reaches the Top of Cone. Shut off water supply.</li>
+      <li><strong>Recirculate to Temp:</strong> Turn on the AODD pump and recirculate for 5 minutes to heat the stainless steel.</li>
+      <li><strong>Verify Temperature &amp; Secure Ports:</strong> Use the IR Thermometer to verify the tank has reached &gt;140°F. Aim the laser at the non-reflective label sticker for an accurate surface temperature reading. Once hot, close side port and sample valves to prevent chemical spray.</li>
+      <li><strong>Drain:</strong> Dump the pre-rinse water to the trench drain.</li>
+    </ol>
+
+    <div class="next-step">
+      ➡️ <strong>Tier 1 (Hot Water Flush Only):</strong> Proceed directly to Phase 4: Cooldown &amp; Final Rinse.<br>
+      ➡️ <strong>Tier 2 (Detergent):</strong> Continue to Phase 2.
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-header" id="phase2">
+      <div class="phase-num">02</div>
+      <div class="phase-title-wrap">
+        <div class="phase-label">Phase</div>
+        <div class="phase-title">Detergent Clean — Tier 2: Sodium Percarbonate</div>
+      </div>
+    </div>
+
+    <ol>
+      <li><strong>Dose Water:</strong> Fill the tank with Hot City Water until the water level reaches the Bottom of Manway.</li>
+      <li><strong>Add Chemical:</strong>
+        <ol>
+          <li>Using the 3/4" socket and wrench, carefully remove the front manway.</li>
+          <li>Weigh out Sodium Percarbonate. Standard dose is 25 grams per gallon (~0.66% by weight):
+            <ul>
+              <li><strong>2,000 Gal Tank (88 Gal working volume):</strong> 2.2 kg (4.8 lbs)</li>
+              <li><strong>3,500 Gal Tank (140 Gal working volume):</strong> 3.5 kg (7.7 lbs)</li>
+            </ul>
+          </li>
+          <li>Add chemical directly to the water through the open manway.</li>
+          <li>Reinstall and tighten the manway.</li>
+        </ol>
+      </li>
+      <li><strong>Wash Cycle (30–45 min):</strong> Start the AODD pump and recirculate the hot detergent mixture. Open the Fill Port arm valve for at least 10–15 minutes during this cycle to push detergent through that routing. Briefly open the sample port valve to flush the port, then close it.</li>
+      <li><strong>Safe Chemical Sampling:</strong> Never catch a midstream sample from the drain hose. Stop the AODD pump and draw carefully from the manifold sample valve into a glass beaker.</li>
+      <li><strong>Drain &amp; Rinse:</strong> Dump detergent solution completely to the trench drain.</li>
+      <li><strong>Clear Lines:</strong> Turn on Hot City Water and rinse the tank, running fresh water through all CIP routes including the CIP ball, Fill Port, and a brief flush of the sample port.</li>
+      <li><strong>Verify Neutrality:</strong> Use pH test strips on the drain water. Continue rinsing until pH matches incoming city water (~pH 7), confirming all detergent is cleared.</li>
+    </ol>
+
+    <div class="next-step">
+      ➡️ <strong>Tier 2 (Detergent Only):</strong> Proceed directly to Phase 4: Cooldown &amp; Final Rinse.<br>
+      ➡️ <strong>Tier 3 (Acid Rinse):</strong> Continue to Phase 3.
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-header" id="phase3">
+      <div class="phase-num">03</div>
+      <div class="phase-title-wrap">
+        <div class="phase-label">Phase</div>
+        <div class="phase-title">Acid Rinse / Passivation — Tier 3: Citric Acid</div>
+      </div>
+    </div>
+
+    <ol>
+      <li><strong>Ensure Rinsed:</strong> Complete a full Phase 2 clean and confirm all detergent is fully rinsed out.</li>
+      <li><strong>Dose Water &amp; Acid:</strong> Fill with Hot City Water to the Bottom of Manway.
+        <ol>
+          <li>Remove the manway and weigh out Citric Acid. Standard dose is 100 grams per gallon (~2.6% by weight):
+            <ul>
+              <li><strong>2,000 Gal Tank (88 Gal working volume):</strong> 8.8 kg (19.4 lbs)</li>
+              <li><strong>3,500 Gal Tank (140 Gal working volume):</strong> 14.0 kg (30.9 lbs)</li>
+            </ul>
+          </li>
+          <li>Add chemical directly through the manway and reseal.</li>
+        </ol>
+      </li>
+      <li><strong>Recirculate &amp; Drain:</strong> Turn on the pump and recirculate through all pathways (including a brief sample port flush) for 15–20 minutes. Drain acid solution completely.</li>
+      <li><strong>Rinse:</strong> Rinse thoroughly with Hot City Water until drain water tests pH neutral. If passivating the steel, allow the tank to air dry completely for 24–48 hours before use.</li>
+    </ol>
+
+    <div class="next-step">
+      ➡️ Proceed to Phase 4: Cooldown &amp; Final Rinse.
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase-header" id="phase4">
+      <div class="phase-num">04</div>
+      <div class="phase-title-wrap">
+        <div class="phase-label">Phase</div>
+        <div class="phase-title">Cooldown &amp; Final Rinse</div>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <p><strong>Critical Implosion Risk:</strong> Do not shock the hot tank with cold water. Ensure the front manway is OPEN before beginning the cooldown process.</p>
+    </div>
+
+    <ol>
+      <li><strong>Gradual Cooldown:</strong> Begin rinsing by blending Hot City Water and Cold City Water at the utility inlet. Gradually decrease the hot water to safely bring internal temperature down.</li>
+      <li><strong>Temperature Check:</strong> Monitor tank temperature using the sticker target on the tank exterior.</li>
+      <li><strong>Final RO Rinse:</strong> Once the tank surface temperature drops below 100°F, shut off city water and switch to the RO Water System. Circulate cold RO water for 10–15 minutes through all pathways to flush all remaining hard water residues. Drain completely.
+        <div class="callout callout-tip" style="margin-top:8px;"><p>Purpose: Remove mineral content to prevent spotting and scaling.</p></div>
+      </li>
+    </ol>
+
+    <div class="next-step">
+      ➡️ Proceed to Phase 5: Teardown &amp; Record-Keeping.
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase-header" id="phase5">
+      <div class="phase-num">05</div>
+      <div class="phase-title-wrap">
+        <div class="phase-label">Phase</div>
+        <div class="phase-title">Teardown &amp; Record-Keeping</div>
+      </div>
+    </div>
+
+    <ol>
+      <li><strong>Shut Off Utilities:</strong> Turn off compressed air supply to the AODD pump. Shut off all water supply valves.</li>
+      <li><strong>Relieve Pressure:</strong> Before unclamping any hoses, slightly crack open the highest butterfly valve in the loop (usually at the Fill Port or CIP arm manifold) to safely bleed off trapped liquid and air pressure.</li>
+      <li><strong>Disconnect:</strong> Disconnect hoses, drain remaining standing water into the large stainless steel bucket, replace the trench drain cover, and return all equipment to designated storage.</li>
+      <li><strong>Log Data:</strong> Record the CIP process in the maintenance logbook:</li>
+    </ol>
+
+    <div class="log-fields">
+      <div class="log-field"><div class="log-field-label">Date</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Operator Name</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Tank IDs</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Prior Batch ID</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Tier(s) Performed</div>Hot / Detergent / Citric</div>
+      <div class="log-field"><div class="log-field-label">Max Temperature (°F)</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Final Rinse pH</div>&nbsp;</div>
+      <div class="log-field"><div class="log-field-label">Issues / Notes</div>&nbsp;</div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <h2 id="troubleshooting">Troubleshooting &amp; Common Issues</h2>
+
+    <div class="trouble-item">
+      <h4>Residue or Foaming After Detergent Cycle</h4>
+      <ul>
+        <li>Increase rinse cycles with hot city water</li>
+        <li>Verify correct Sodium Percarbonate dosage and temperature</li>
+      </ul>
+    </div>
+
+    <div class="trouble-item">
+      <h4>pH Not Neutral After Citric Acid Rinse</h4>
+      <ul>
+        <li>Extend circulation time or decrease acid concentration slightly</li>
+        <li>Ensure adequate rinsing with hot city water followed by cold RO water</li>
+      </ul>
+    </div>
+
+    <div class="trouble-item">
+      <h4>Spray Ball Not Dispersing Evenly</h4>
+      <ul>
+        <li>Check for clogs or obstructions in the spray ball assembly</li>
+        <li>Increase pump flow rate via the Compressed Air System regulator if necessary</li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
