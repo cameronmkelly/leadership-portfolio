@@ -64,7 +64,6 @@
     font-size: 1rem;
     color: var(--text-muted);
     font-style: italic;
-    max-width: 600px;
     line-height: 1.8;
     padding-left: 16px;
     border-left: 3px solid var(--border);
@@ -218,6 +217,21 @@
   }
 
   /* ── RESPONSIVE ── */
+
+  /* ── SHALLOW HERO ── */
+  .shallow-hero {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+  }
+  .shallow-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('header-photo.jpg');
+    background-size: cover;
+    background-position: center 60%;
+    filter: brightness(0.35);
+  }
 
   /* ── SITE NAV ── */
   .site-nav {
@@ -393,6 +407,10 @@
 </head>
 <body>
 
+
+<div class="shallow-hero">
+  <div class="shallow-hero-bg"></div>
+</div>
 
 <nav class="site-nav">
   <div class="site-nav-inner">
