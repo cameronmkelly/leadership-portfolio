@@ -245,6 +245,21 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── SHALLOW HERO ── */
+  .shallow-hero {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+  }
+  .shallow-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('header-photo.jpg');
+    background-size: cover;
+    background-position: center 60%;
+    filter: brightness(0.35);
+  }
+
   /* ── SITE NAV ── */
   .site-nav {
     background: white;
@@ -420,6 +435,10 @@
 <body>
 
 
+<div class="shallow-hero">
+  <div class="shallow-hero-bg"></div>
+</div>
+
 <nav class="site-nav">
   <div class="site-nav-inner">
     <a class="site-nav-back" href="index.html">
@@ -451,7 +470,7 @@
   <div class="container">
     <div class="page-label">Program Outcome &nbsp;02</div>
     <h1 class="page-title">Act Like a Leader</h1>
-    <p class="page-description">Leadership shows up in the decisions you make when no one is watching and the systems you build before anyone asks you to. This section documents work that required me to identify a problem, commit to solving it, and see it through.</p>
+    <p class="page-description">Most of the leadership I've done wasn't assigned to me. It showed up as a problem that needed solving, a gap nobody else was filling, or a system that didn't exist yet. This section is a record of that work.</p>
   </div>
 </div>
 
@@ -461,29 +480,21 @@
       <div class="artifact-card-body">
         <div class="artifact-label">Project</div>
         <div class="artifact-title">Standard Operating Procedure Development</div>
-        <p>I've written SOPs for multiple facilities over the years and the process always had the same problem: documents end up scattered, hard to navigate, and disconnected from each other. Existing document control platforms are either too expensive for a small operation or too complicated to justify. There were no templates that actually fit how a lean facility works. So during a period when my company had some breathing room, I built one from scratch — a structured, cross-linked framework that connects SOPs to the equipment they govern, the chemicals they require, and the vendors who support them. It's designed to be the thing I wish had existed at every job I've ever had.</p>
+        <p>I've written SOPs for multiple facilities over the years and the process always had the same problem: documents end up scattered, hard to navigate, and disconnected from each other. Existing document control platforms are either too expensive for a small operation or too complicated to justify. There were no templates that actually fit how a lean facility works. So during a period when my company had some breathing room, I built one from scratch: a structured, cross-linked framework that connects SOPs to the equipment they govern, the chemicals they require, and the vendors who support them. It's designed to be the thing I wish had existed at every job I've ever had.</p>
       </div>
-      <div class="artifact-card-footer">
-        <span class="artifact-meta">Web &nbsp;&middot;&nbsp; Ongoing</span>
-        <a class="artifact-link" href="https://cameronmkelly.github.io/leadership-portfolio/sop-processing-tank-cip.html">
-          View Project
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="iframe-preview" style="border-top:1px solid var(--border); border-radius:0;">
+        <div class="iframe-label">
+          <span class="iframe-label-text">SOP &mdash; Processing Tank CIP</span>
+          <a href="https://cameronmkelly.github.io/leadership-portfolio/sop-processing-tank-cip.html" target="_blank" rel="noopener">
+            Open full page
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <iframe src="https://cameronmkelly.github.io/leadership-portfolio/sop-processing-tank-cip.html" title="Processing Tank CIP SOP" loading="lazy"></iframe>
       </div>
     </div>
 
-    <div class="iframe-preview">
-      <div class="iframe-label">
-        <span class="iframe-label-text">SOP &mdash; Processing Tank CIP</span>
-        <a href="https://cameronmkelly.github.io/leadership-portfolio/sop-processing-tank-cip.html" target="_blank" rel="noopener">
-          Open full page
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-      <iframe src="https://cameronmkelly.github.io/leadership-portfolio/sop-processing-tank-cip.html" title="Processing Tank CIP SOP" loading="lazy"></iframe>
-    </div>
-
-    <div class="placeholder-note">
+    <div class="placeholder-note" style="margin-top:32px;">
       <p>This section will be updated throughout the program with additional examples of leadership in action, lessons learned, and evidence of growth.</p>
     </div>
   </div>
